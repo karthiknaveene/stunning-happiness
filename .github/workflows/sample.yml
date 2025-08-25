@@ -2,7 +2,7 @@ name: Update Timestamp
 
 on:
   schedule:
-    - cron: '*/1 * * * *'  # Adjust to desired interval
+    - cron: '*/5 * * * *'  # Adjust to desired interval
 
 jobs:
   update-timestamp:

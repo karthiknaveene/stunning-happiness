@@ -1,0 +1,28 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: test workflow
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Make changes (example: update timestamp)
+        run: |
+          echo "Last commit: $(date)" > last-commit.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add last-commit.txt
+          git commit -m "Update last-commit.txt [skip ci]" || echo "No changes to commit"
+          git push origin HEAD:${GITHUB_REF#refs/heads/}

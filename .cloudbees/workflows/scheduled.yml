@@ -4,7 +4,7 @@ name: test workflow
 
 on:
   schedule:
-    - cron: '*/1 * * * *'
+    - cron: '*/2 * * * *'
 
 jobs:
   commit:

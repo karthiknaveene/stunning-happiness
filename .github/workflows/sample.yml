@@ -1,27 +1,35 @@
-name: Update Timestamp
+name: Scheduled Commit Changes
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Adjust to desired interval
+    - cron: "*/5 * * * *"  # Runs every 5 minutes
 
 jobs:
-  update-timestamp:
-    runs-on: ubuntu-latest
+  commit_changes:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      # Checkout the repository to work with
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Update timestamp
-        run: echo "Last commit:$(date)" > last-commit.txt
-
-      - name: Commit and push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Set up Git configuration
+      - name: Set up Git
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add last-commit.txt
-          git diff --staged --quiet || git commit -m "Update last-commit.txt [skip ci]"
-          git push origin HEAD:$(echo $GITHUB_REF | sed -e 's/refs\/heads\///')
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-#Test
+      # Make changes (for example, modify README.md)
+      - name: Modify README.md
+        run: |
+          echo "This change was made by GitHub Actions at $(date)" >> README.md
+          cat README.md
+
+      # Commit and push the changes
+      - name: Commit changes
+        run: |
+          git add README.md
+          git commit -m "Automated update at $(date)"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided GitHub token

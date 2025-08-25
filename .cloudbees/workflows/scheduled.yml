@@ -15,7 +15,7 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Make changes (example: update timestamp)
+      - name: Make changes
         run: |
           echo "Last commit: $(date)" > last-commit.txt
 

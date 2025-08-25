@@ -7,7 +7,7 @@ pipeline {
                 stage('Compile') {
                     steps {
                         echo 'Compiling...'
-                        sleep 10
+                        sleep 2
                     }
                 }
                 stage('Package') {
@@ -24,12 +24,12 @@ pipeline {
                 echo 'Registering the metadata'
                 echo 'Another echo to make the pipeline a bit more complex'
                 registerBuildArtifactMetadata(
-                    name: "bug-bash-artifact-qa",
+                    name: "bug-bash-artifact-qa-feature-2",
                     version: "1.0.1",
                     type: "docker",
-                    url: "http://localhost:2000",
-                    digest: "6f637064707039346163663237383938",
-                    label: "qa-bugbash"
+                    url: "http://localhost:2002",
+                    digest: "6f637064707039346163663237383922",
+                    label: "qa-bugbash-feature-2"
                 )
             }
         }

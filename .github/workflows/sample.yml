@@ -23,3 +23,5 @@ jobs:
           git add last-commit.txt
           git diff --staged --quiet || git commit -m "Update last-commit.txt [skip ci]"
           git push origin HEAD:$(echo $GITHUB_REF | sed -e 's/refs\/heads\///')
+
+#Test

@@ -25,7 +25,7 @@ pipeline {
                 echo 'Another echo to make the pipeline a bit more complex'
                 registerBuildArtifactMetadata(
                     name: "bug-bash-artifact-qa-asper-14",
-                    version: "1.0.14",
+                    version: "1.0.147",
                     type: "docker",
                     url: "http://localhost:2014",
                     digest: "6f637064707039346163663237383938",
